@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { css } from '../../node_modules/styled-components/dist/styled-components.cjs';
 /*
 ### 카테고리 선택 UI 만들기
 - categories 라는 배열 안에 name과 text 값이 들어가 있는 객체들을 넣어 주어서 한글로 된 카테고리와 실제 카테고리 값 연결시켜주기
@@ -47,6 +48,11 @@ const CategoriesBlock = styled.div`
   }
 `;
 
+/*
+- Categories에서 props로 전달받은 onSelect를 각 Category 컴포넌트의 onClick으로 설정
+- 현재 선택된 카테고리 값에 따라 다른 스타일 적용
+*/
+
 const Category = styled.div`
   font-size: 1.125rem;
   cursor: pointer;
@@ -59,16 +65,32 @@ const Category = styled.div`
     color: #495057;
   }
 
+  ${props =>
+  props.active && css`
+    font-weight: 600;
+    border-bottom: 2px solid #22b8cf;
+    color: #22b8cf;
+    &:hover {
+      color: #3bc9db;
+    }
+  `}
+
   & + & {
     margin-left: 1rem;
   }
 `;
 
-const Categories = () => {
+const Categories = ({ onSelect, category}) => {
   return (
     <CategoriesBlock>
       {categories.map(c => (
-        <Category key={c.name}>{c.text}</Category>
+        <Category
+          key={c.name}
+          active={category === c.name}
+          onClick={() => onSelect(c.name)}
+        >
+          {c.text}
+        </Category>
       ))}
     </CategoriesBlock>
   );
