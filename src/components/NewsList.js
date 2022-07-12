@@ -50,7 +50,13 @@ const sampleArticle = {
 };
 */
 
-const NewsList = () => {
+
+/*
+### API 호출할 때 카테고리 지정 구현
+- NewsList 컴포넌트에서 현재 props로 받아 온 category에 따라 카테고리 지정하여 API 요청하도록 구현
+*/
+
+const NewsList = ({category}) => {
   // useState, useEffect 사용
   const [articles, setArticles] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -60,8 +66,9 @@ const NewsList = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        const query = category === 'all' ? '' : `&category=${category}`;
         const response = await axios.get(
-          'https://newsapi.org/v2/top-headlines?country=kr&apiKey=432e7b719e4645c29a1fc258b7adf8d4',
+          `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=432e7b719e4645c29a1fc258b7adf8d4`,
         );
         setArticles(response.data.articles);
       } catch (e) {
@@ -70,7 +77,7 @@ const NewsList = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [category]);
 
   // 대기 중일 때
   if (loading) {
