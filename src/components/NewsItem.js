@@ -17,8 +17,8 @@ const NewsItemBlock = styled.div`
     margin-right: 1rem;
     img {
       display: block;
-      width: 160px;
-      height: 100px;
+      width: 280px;
+      height: 180px;
       object-fit: cover;
     }
   }

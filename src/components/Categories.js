@@ -1,5 +1,19 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import palette from '../lib/styles/palette';
+import Responsive from './common/Responsive';
+import { Link } from 'react-router-dom';
+
+const NewsViewer = styled.div`
+  display: inline-block;
+  font-size: 2rem;
+  padding-right: 3rem;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+`;
 
 const categories = [
   {
@@ -33,10 +47,12 @@ const categories = [
 ];
 
 const CategoriesBlock = styled.div`
-  display: flex;
-  padding: 1rem;
-  width: 768px;
+  /* display: flex; */
+  background: ${palette.gray[9]};
+  position: fixed;
+  width: 100%;
   margin: 0 auto;
+  box-shadow: 0px 4px 6px rgba(0,0,0, 0.5);
   @media screen and (max-width: 768px) {
     width: 100%;
     overflow-x: auto;
@@ -44,45 +60,114 @@ const CategoriesBlock = styled.div`
 `;
 
 
+/*
+  Responsive 컴포넌트의 속성에 스타일을 추가해서 새로운 컴포넌트 생성
+*/
+const Wrapper = styled(Responsive)`
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 자식 엘리먼트 사이의 여백을 최대로 설정 */
+  .logo {
+    font-size: 1.125rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+  }
+  .right {
+    display: flex;
+    align-items: center;
+  }
+`;
+
+/*
+  헤더가 fixed 로 되어 있기 때문에 콘텐츠가 헤더와 안 겹치고 4rem 아래인 헤더 바로 밑에 나타나도록 해주는 컴포넌트
+*/
+const Spacer = styled.div`
+  height: 5rem;
+`;
+
+
+
 const Category = styled(NavLink)`
-  font-size: 1.125rem;
+  font-size: 1rem;
   cursor: pointer;
   white-space: pre;
   text-decoration: none;
-  color: inherit;
-  padding-bottom: 0.25rem;
+  color: ${palette.gray[3]};
+  transition: all 0.5s;
 
   &:hover {
-    color: #495057;
+    color: ${palette.gray[9]};
+    background: ${palette.gray[6]};
+    border-radius: 50px;
+    padding: 1rem 1.5rem;
   }
 
   &.active {
     font-weight: 600;
-    border-bottom: 2px solid #22b8cf;
-    color: #22b8cf;
+    color: ${palette.gray[0]};
+    background: ${palette.gray[6]};
+    border-radius: 50px;
+    padding: 1rem 1.5rem;
     &:hover {
-      color: #3bc9db;
+      color: ${palette.gray[9]};
     }
   }
 
   & + & {
-    margin-left: 1rem;
+    margin-left: 2rem;
+  }
+`;
+
+const UpBtn = styled.button`
+  position: fixed;
+  bottom: 3rem;
+  right: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: ${palette.gray[9]};
+  background: ${palette.blue[3]};
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    font-size: 2.25rem;
+    background: ${palette.blue[5]};
+    width: 52px;
+    height: 52px;
   }
 `;
 
 const Categories = () => {
+  const UpPage = () => { window.scrollTo(0, 0) };
+
   return (
+    <>
     <CategoriesBlock>
-      {categories.map(c => (
-        <Category
-          key={c.name}
-          className={({ isActive}) => (isActive ? 'active' : undefined)}
-          to={c.name === 'all' ? '/' : `/${c.name}`}
-        >
-          {c.text}
-        </Category>
-      ))}
-    </CategoriesBlock>
+        <Wrapper>
+          <NewsViewer>
+            <Link to='/'><p>NEWS</p><p>VIEWER</p></Link>
+          </NewsViewer>
+        {categories.map(c => (
+          <Category
+            key={c.name}
+            className={({ isActive}) => (isActive ? 'active' : undefined)}
+            to={c.name === 'all' ? '/' : `/${c.name}`}
+          >
+            {c.text}
+          </Category>
+        ))}
+      </Wrapper>
+      </CategoriesBlock>
+      <Spacer />
+      <UpBtn onClick={UpPage}>
+        &#8963;
+      </UpBtn>
+    </>
   );
 };
 
