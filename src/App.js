@@ -6,7 +6,7 @@ const App = () => {
   return (
     <>
       <Helmet>
-        <title>NEW VEWER</title>
+        <title>NEWS VEWER</title>
       </Helmet>
       <Routes>
         <Route path="/" element={<NewsPage />} />
