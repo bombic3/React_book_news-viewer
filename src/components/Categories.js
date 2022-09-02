@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import palette from '../lib/styles/palette';
-import Responsive from './common/Responsive';
 import { Link } from 'react-router-dom';
 
 const NewsViewer = styled.div`
@@ -47,7 +46,6 @@ const categories = [
 ];
 
 const CategoriesBlock = styled.div`
-  /* display: flex; */
   background: ${palette.gray[9]};
   position: fixed;
   width: 100%;
@@ -59,12 +57,12 @@ const CategoriesBlock = styled.div`
   }
 `;
 
-
-/*
-  Responsive 컴포넌트의 속성에 스타일을 추가해서 새로운 컴포넌트 생성
-*/
-const Wrapper = styled(Responsive)`
+const Wrapper = styled.div`
+  width: 1024px;
   height: 5rem;
+  margin: 0 auto; /* 중앙 정렬 */
+  padding-left: 1rem;
+  padding-right: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between; /* 자식 엘리먼트 사이의 여백을 최대로 설정 */
@@ -76,6 +74,14 @@ const Wrapper = styled(Responsive)`
   .right {
     display: flex;
     align-items: center;
+  }
+
+   /* 브라우저 크기에 따라 가로 크기 변경 */
+  @media (max-width: 1024px) {
+    width: 768px;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `;
 
