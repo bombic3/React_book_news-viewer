@@ -1,12 +1,18 @@
+import { Helmet } from 'react-helmet-async';
 import { Route, Routes } from 'react-router-dom';
 import NewsPage from './pages/NewsPage';
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<NewsPage />} />
-      <Route path="/:category" element={<NewsPage />} />
-    </Routes>
+    <>
+      <Helmet>
+        <title>NEW VEWER</title>
+      </Helmet>
+      <Routes>
+        <Route path="/" element={<NewsPage />} />
+        <Route path="/:category" element={<NewsPage />} />
+      </Routes>
+      </>
   );
 };
 
