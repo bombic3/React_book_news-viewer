@@ -132,7 +132,7 @@ const UpBtn = styled.button`
   font-size: 2rem;
   font-weight: bold;
   color: ${palette.gray[9]};
-  background: ${palette.blue[3]};
+  background: ${palette.gray[4]};
   border: none;
   width: 50px;
   height: 50px;
@@ -142,9 +142,9 @@ const UpBtn = styled.button`
 
   &:hover {
     font-size: 2.25rem;
-    background: ${palette.blue[5]};
-    width: 52px;
-    height: 52px;
+    background: ${palette.gray[2]};
+    height: 65px;
+    border-radius: 50px;
   }
 `;
 

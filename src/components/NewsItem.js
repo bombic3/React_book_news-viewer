@@ -45,6 +45,7 @@ const NewsItemBlock = styled.div`
 `;
 
 const NewsItem = ({ article }) => {
+  
   const { title, description, url, urlToImage } = article;
   return (
     <NewsItemBlock>
