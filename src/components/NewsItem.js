@@ -12,6 +12,9 @@ import styled from 'styled-components';
 
 const NewsItemBlock = styled.div`
   display: flex;
+  box-shadow: 1px 5px 3px 2px rgba(0,0,0, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
 
   .thumbnail {
     margin-right: 1rem;
